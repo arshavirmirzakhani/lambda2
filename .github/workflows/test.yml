@@ -1,0 +1,25 @@
+name: build and test 
+
+on: push
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content
+      - name: setup Python
+        uses: actions/setup-python@v5.1.0
+      - name: install pyinstaller
+        run: pip install pyinstaller
+      - name: install requirements
+        run: pip install -r requirements.txt
+      - name: build
+        run: pyinstaller --onefile main.py -n Lambda2-${{ runner.os }}
+          
+       
