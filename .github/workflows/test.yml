@@ -20,6 +20,6 @@ jobs:
       - name: install requirements
         run: pip install -r requirements.txt
       - name: build
-        run: pyinstaller --onefile main.py -n Lambda2-${{ runner.os }}
+        run: pyinstaller --onefile --windowed --icon=icon.ico main.py -n Lambda2-${{ runner.os }}
           
        
