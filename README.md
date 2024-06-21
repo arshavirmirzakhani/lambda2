@@ -5,3 +5,7 @@
 
 # lambda2
 lambda2 is the next generation node based algorithm simulator built using python3 and Qt (pyside6)
+
+<p align="center">
+  <img src="icon.png"/>  
+</p>
