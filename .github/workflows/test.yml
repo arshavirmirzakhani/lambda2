@@ -23,5 +23,19 @@ jobs:
         run: pip install -r requirements.txt
       - name: build
         run: pyinstaller --onefile --windowed --icon=icon.ico main.py -n Lambda2-${{ runner.os }}
+      - name: upload windows artifact
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }}
+          path: dist/Lambda2-${{ runner.os }}.exe
+
+      - name: upload ubuntu and macos artifact
+        if: runner.os != 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }}
+          path: dist/Lambda2-${{ runner.os }}
+            
           
        
