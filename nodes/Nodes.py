@@ -1,4 +1,5 @@
 from PySide6 import QtWidgets
+from PySide6.QtWidgets import QLabel
 from OdenGraphQt import BaseNode
 
 
@@ -12,6 +13,14 @@ class ConstantNode(BaseNode):
         self.add_output("Output")
         self.add_text_input("value_input",label="Value")
 
+class LabelNode(BaseNode):
+
+    __identifier__ = "Nodes"
+    NODE_NAME = "Label"
+
+    def __init__(self):
+        super(LabelNode, self).__init__()
+        self.add_input("Value")
 
 class AddNode(BaseNode):
 

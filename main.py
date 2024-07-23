@@ -1,5 +1,6 @@
 import sys
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
+import PySide6.QtCore as QtCore
+from PySide6.QtWidgets import QApplication, QMainWindow
 from nodes.Nodes import *
 from Graph import Graph
 
@@ -10,16 +11,20 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Lambda2")
 
-        self.node_graph = Graph()
-        self.node_graph.register_node(AddNode)
-        self.node_graph.register_node(ConstantNode)
+        node_graph = Graph()
+        node_graph.register_node(ConstantNode)
+        node_graph.register_node(LabelNode)
+        node_graph.register_node(AddNode)
 
-        self.context_menu = self.node_graph.get_context_menu("graph")
-        self.nodes_menu = self.context_menu.add_menu("Nodes")
-        self.nodes_menu.add_command('Add',lambda : self.node_graph.create_node("Nodes.AddNode"))
+        context_menu = node_graph.get_context_menu("graph")
+        nodes_menu = context_menu.add_menu("Create Node")
 
-        self.NodeGraphWidget = self.node_graph.widget
-        self.setCentralWidget(self.NodeGraphWidget)
+        nodes_menu.add_command('Constant',lambda : node_graph.create_node("Nodes.ConstantNode"))
+        nodes_menu.add_command('Label',lambda : node_graph.create_node("Nodes.LabelNode"))
+        nodes_menu.add_command('Add',lambda : node_graph.create_node("Nodes.AddNode"))
+
+        node_graph_widget = node_graph.widget
+        self.setCentralWidget(node_graph_widget)
 
 
 if __name__ == "__main__":

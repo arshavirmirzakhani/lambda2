@@ -2,6 +2,8 @@ from OdenGraphQt.base.commands import NodeAddedCmd
 from OdenGraphQt import NodeGraph,NodeObject
 from OdenGraphQt.errors import NodeCreationError
 
+# overrided base class for fixing node name changing bug
+
 class Graph(NodeGraph):
 
     def create_node(self, node_type, name=None, selected=True, color=None,
@@ -73,7 +75,6 @@ class Graph(NodeGraph):
             if pos:
                 node.model.pos = [float(pos[0]), float(pos[1])]
 
-            # initial node direction layout.
             node.model.layout_direction = self.layout_direction()
 
             node.update()
@@ -150,10 +151,8 @@ class Graph(NodeGraph):
         node.model._graph_model = self.model
         node.model.name = node.NODE_NAME
 
-        # initial node direction layout.
         node.model.layout_direction = self.layout_direction()
 
-        # update method must be called before it's been added to the viewer.
         node.update()
 
         undo_cmd = NodeAddedCmd(self, node, pos=pos, emit_signal=False)
