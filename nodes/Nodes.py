@@ -1,9 +1,10 @@
 from PySide6 import QtWidgets
-from OdenGraphQt import BaseNode, NodeGraph
+from OdenGraphQt import BaseNode
+
 
 class ConstantNode(BaseNode):
 
-    __identifier__ = "Lambda2"
+    __identifier__ = "Nodes"
     NODE_NAME = "Constant"
 
     def __init__(self):
@@ -11,9 +12,10 @@ class ConstantNode(BaseNode):
         self.add_output("Output")
         self.add_text_input("value_input",label="Value")
 
+
 class AddNode(BaseNode):
 
-    __identifier__ = "Lambda2"
+    __identifier__ = "Nodes"
     NODE_NAME = "Add"
 
     def __init__(self):
@@ -21,4 +23,3 @@ class AddNode(BaseNode):
         self.add_input("A")
         self.add_input("B")
         self.add_output("Result")
-

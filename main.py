@@ -1,6 +1,8 @@
-from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 import sys
+from PySide6.QtWidgets import QApplication, QWidget, QMainWindow
 from nodes.Nodes import *
+from Graph import Graph
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -8,19 +10,22 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("Lambda2")
 
+        self.node_graph = Graph()
+        self.node_graph.register_node(AddNode)
+        self.node_graph.register_node(ConstantNode)
+
+        self.context_menu = self.node_graph.get_context_menu("graph")
+        self.nodes_menu = self.context_menu.add_menu("Nodes")
+        self.nodes_menu.add_command('Add',lambda : self.node_graph.create_node("Nodes.AddNode"))
+
+        self.NodeGraphWidget = self.node_graph.widget
+        self.setCentralWidget(self.NodeGraphWidget)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     window = MainWindow()
     window.show() 
-
-    node_graph = NodeGraph()
-    node_graph.register_node(AddNode)
-    node_graph.register_node(ConstantNode)
-    node_graph.widget.show()
-
-    node = node_graph.create_node("Lambda2.AddNode")
-    node = node_graph.create_node("Lambda2.ConstantNode")
 
     app.exec()
