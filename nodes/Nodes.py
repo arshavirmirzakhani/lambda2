@@ -1,5 +1,3 @@
-from PySide6 import QtWidgets
-from PySide6.QtWidgets import QLabel
 from OdenGraphQt import BaseNode
 
 
